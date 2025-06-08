@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Developer Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ff6b6b" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffa500" stop-opacity="0.05"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="600" cy="700" r="120" fill="url(%23a)"/></svg>') no-repeat center;
+            background-size: cover;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .text-container {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .text-container h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: slideInFromLeft 1s ease-out 0.5s forwards;
+        }
+
+        .lg-text {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500, #ff6b6b);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .text-container h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 0.2rem;
+            margin-top: 1rem;
+            opacity: 0;
+            animation: slideInFromRight 1s ease-out 1s forwards;
+        }
+
+        @keyframes slideInFromLeft {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInFromRight {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Dark Section */
+        .dark-bg {
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dark-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .dark-bg p {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 0.1rem;
+            z-index: 2;
+            position: relative;
+        }
+
+        .dark-bg .lg-text {
+            color: #ff6b6b;
+            font-weight: 800;
+        }
+
+        /* Card Section */
+        .card-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500, #ff6b6b);
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .card:hover .card-img::before {
+            transform: translateX(100%);
+        }
+
+        .card-info {
+            padding: 2rem;
+        }
+
+        .card-info h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .card-info p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        /* Contact About Section */
+        .contact-about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 60vh;
+        }
+
+        .contact, .about {
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+        }
+
+        .about {
+            background: linear-gradient(135deg, #5f27cd, #341f97);
+            color: white;
+        }
+
+        .contact::before, .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+        }
+
+        .contact h2, .about h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .contact h2::after, .about h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 2px;
+        }
+
+        .contact p, .about p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .lg-text {
+                font-size: 2.5rem;
+            }
+
+            .text-container h1 {
+                font-size: 2rem;
+            }
+
+            .text-container h2 {
+                font-size: 1.5rem;
+            }
+
+            .dark-bg p {
+                font-size: 1.8rem;
+            }
+
+            .card-section {
+                grid-template-columns: 1fr;
+                padding: 3rem 1rem;
+            }
+
+            .contact-about {
+                grid-template-columns: 1fr;
+            }
+
+            .contact, .about {
+                padding: 3rem 2rem;
+            }
+
+            .contact h2, .about h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .text-container {
+                padding: 1rem;
+            }
+
+            .lg-text {
+                font-size: 2rem;
+            }
+
+            .text-container h1 {
+                font-size: 1.5rem;
+                letter-spacing: 0.1rem;
+            }
+
+            .text-container h2 {
+                font-size: 1.2rem;
+            }
+
+            .dark-bg p {
+                font-size: 1.4rem;
+            }
+
+            .card-section {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Additional animations */
+        .card {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.2s; }
+        .card:nth-child(2) { animation-delay: 0.4s; }
+        .card:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Icon styles for cards */
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="hero-section">
+            <div class="text-container">
+                <h2><span class="lg-text">Hi,</span> I am John Doe</h2>
+                <h1>FULL STACK DEVELOPER</h1>
+            </div>
+        </section>
+
+        <section class="dark-bg">
+            <p>WORK I CAN DO FOR <span class="lg-text">YOU</span></p>
+        </section>
+
+        <section class="card-section">
+            <div class="card">
+                <div class="card-img">
+                    <div class="card-icon">🌐</div>
+                </div>
+                <div class="card-info">
+                    <h3>Web Development</h3>
+                    <p>Creating responsive and dynamic web applications using modern technologies like React, Node.js, and MongoDB. Focused on delivering exceptional user experiences with clean, efficient code.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    <div class="card-icon">📱</div>
+                </div>
+                <div class="card-info">
+                    <h3>App Development</h3>
+                    <p>Building cross-platform mobile applications with React Native and Flutter. Specialized in creating intuitive interfaces that work seamlessly across iOS and Android platforms.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    <div class="card-icon">🎨</div>
+                </div>
+                <div class="card-info">
+                    <h3>UI/UX Design</h3>
+                    <p>Designing user-centered interfaces with modern design principles. Expert in creating wireframes, prototypes, and implementing designs that enhance user engagement and satisfaction.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-about">
+            <div class="contact">
+                <h2>CONTACT ME</h2>
+                <p>Ready to bring your ideas to life? Let's collaborate and create something amazing together. I'm always excited to work on innovative projects that challenge conventional thinking and deliver exceptional results.</p>
+            </div>
+            <div class="about">
+                <h2>ABOUT ME</h2>
+                <p>Passionate full-stack developer with expertise in modern web technologies. I believe in creating digital experiences that are not only functional but also beautiful and intuitive. Always learning, always growing.</p>
+            </div>
+        </section>
+
+        <section class="dark-bg">
+            <p>PROJECT BY <span class="lg-text">DO SOME CODING</span></p>
+        </section>
+    </main>
+</body>
+</html>
